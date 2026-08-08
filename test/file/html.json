@@ -1,0 +1,55 @@
+{
+	"myDoc": {
+		"type": "Html",
+		"value" : {
+			"heading": {
+				"type": "H1",
+				"value" : "This is the heading of the document"
+			},
+			"introduction": {
+				"type": "P",
+				"value": "lorum ipsum\ndolor sit amet"
+			},
+			"3": {
+				"type": "H2",
+				"value": "Requirements"
+			},
+			"4": {
+				"type":"Ul",
+				"value": [
+					"item 1",
+					"item 2",
+					"item 3"
+				]
+			},
+			"5": {
+				"type": "H2",
+				"value": "Instructions"
+			},
+			"6": {
+				"type":"Ol",
+				"value": [
+					"do this",
+					"then this",
+					"finally this"
+				]
+			},
+			"script": {
+				"type": "Code",
+				"value": [
+					"10 print \"Hello world\"",
+					"20 goto 10"
+				]
+			},
+			"references": {
+				"type":"Ul",
+				"value": [
+					{
+						"type": "Link",
+						"value": "http://localhost/help"
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+readme: Html
+	H1 `Silver-data js`
+
+	Img `./favicon.svg`
+
+	Aside `status: just started 🐣`
+
+	H2 `Goals`
+	Ul
+		Clear before clever
+		A little bit configurable
+		Easy to update
+		Fairly modern js, no backward compatibility
+		A basic test suite
+		Single file
+		No dependencies
+		No build
+		JSDoc typing
+		Target browsers
+
+readme end

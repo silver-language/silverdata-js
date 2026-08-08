@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>silverdata-js</title>
+	<link rel="icon" href="./favicon.svg">
+	<link rel="stylesheet" href="./index.css">
+	<title>silverdata-js</title>
+</head>
+<body>
+	<h1>silver-data js</h1>
+	<main>
+		<textarea id="input-silver" spellcheck="false"></textarea>
+		<textarea id="output-json" spellcheck="false" class="json"></textarea>
+	</main>
+
+	<script type="module">
+		import * as silverData from './silver-data.js'
+
+		import readme from './readme.agd' with { type:'text' };	// works in firefox, not in chrome yet
+
+		const silverInput	= document.getElementById('input-silver');
+		const jsonOutput	= document.getElementById('output-json');
+		silverInput.value = readme;
+
+		function update() {
+			jsonOutput.value = silverData.silverToJSON(silverInput.value);
+		}
+		jsonOutput.addEventListener('input', update);
+		update();
+	</script>
+</body>
+</html>

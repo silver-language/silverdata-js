@@ -1,0 +1,31 @@
+/*
+**	index.css
+*/
+
+html {
+	background-color: silver;
+	height: 100%;
+	body { height: 100%; }
+	font-family: sans-serif;
+}
+
+main {
+	height: 90%;
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1em;
+}
+
+textarea {
+	background-color:white;
+	padding:1em;
+	font-size: 14px;
+}
+
+textarea {
+	font-family: monospace;
+}
+output {
+	font-family: sans-serif;
+	border-radius:1em;
+}
