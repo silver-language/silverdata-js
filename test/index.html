@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>agd test</title>
+	<title>silver-data test</title>
 	<link rel="icon" href="../favicon.svg">
 	<link rel="stylesheet" href="../index.css">
 	<style type="text/css">
@@ -43,11 +43,15 @@
 <body>
 	<form name="test">
 		<select name="testName" size="7">
-			<option selected>array</option>
-			<option>html</option>
+			<option selected>assignment-string</option>
+			<!-- <option>array</option>
+			<option>html</option> -->
 		</select>
-		<h2>output</h2>
-		<h2>test</h2>
+		<select name="testType" size="7">
+			<option selected>json</option>
+			<option value="json-with-types">json with types</option>
+		</select>
+		<h2>test file</h2>
 
 		<textarea name="silverInput" spellcheck="false"></textarea>
 		<textarea name="jsonOutput" spellcheck="false" readonly data-test=""></textarea>
@@ -55,7 +59,8 @@
 	</form>
 
 	<script type="module">
-		import * as silverData from '../silver-data.js'
+		import * as silverData from '../silver-data.js';
+		import { fileExtension } from '../core/main.js';
 
 		async function changeTest() {
 			console.clear();
@@ -63,7 +68,11 @@
 			let silverInput = (await import(`./file/${testName}.agd`, { with: { type:'text' }})).default;
 			document.forms['test'].silverInput.value = silverInput;
 
-			let testJson = (await import(`./file/${testName}.json`, { with: { type:'text' }})).default;
+			const testType = document.forms['test'].testType.value;
+			const ext = fileExtension[testType];
+			console.log(testType,ext);
+
+			let testJson = (await import(`./file/${testName}.${ext}`, { with: { type:'text' }})).default;
 			document.forms['test'].testJson.value = testJson;
 			update();
 		}
@@ -83,6 +92,7 @@
 
 		}
 		document.forms['test']['testName'].addEventListener('change', changeTest);
+		document.forms['test']['testType'].addEventListener('change', changeTest);
 		document.forms['test']['silverInput'].addEventListener('input', update);
 		changeTest();
 	</script>

@@ -1,6 +1,8 @@
 Initial work
 ============
 
+I've made a couple of attempts at this previously, time for another go.
+
 
 ```
 2026-08-08		🎁🐣		Start work
@@ -13,10 +15,20 @@ Initial work
 * initial custom convertor for Html type
 
 
-Intro
------
-I've made a couple of attempts at this previously, time for another go.
 
 
+Various representations
+-----------------------
+
+Starting with a basic assignment, where the value is string-like:
+```
+name: Type `value`
+```
+There are few different representations you could generate from it
+* document structure / lines
+* tokens
+* some sort of idealised 'silver' representation
+* simplified js objects that just include a string 'type' field
+* converted to json with conversion to the 6 types
 
 
