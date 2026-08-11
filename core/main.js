@@ -1,6 +1,6 @@
 
 import * as parse from './parse.js';
-import * as render from './render.js';
+import * as json from './json.js';
 
 
 export const fileExtension = {
@@ -24,7 +24,7 @@ export function silverToJS(silverData) {
  */
 export function silverToJSON(silverData) {
 	const sd = parse.assignment(silverData);
-	const result = render.json(sd);
+	const result = json.stringify(sd);
 	return result;
 }
 

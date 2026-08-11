@@ -34,15 +34,18 @@
 
 
 
-export function statement() {
 
-}
+
 
 
 /**
  * @param {any} object
  * @returns {string}
  */
-export function json(object) {
+export function stringify(object) {
 	return JSON.stringify(object, undefined, '	');
 }
+
+
+
+

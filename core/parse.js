@@ -1,10 +1,11 @@
 /*
 **	parse.js
+// input strings
+// return various intermediate representations
 */
 
 
-// input strings
-// return various intermediate representations
+
 
 
 const statement = /^(\w+)\s*:\s*([A-Z]\w+)\s+(.*)$/;
@@ -35,20 +36,7 @@ export function assignment(string) {
 
 
 
-/** SilverNode
- * @typedef {Object} SilverNode
- * @property {string} type
- * @property {array|object|SimpleValue} value
- */
-
-/** SimpleValue
- * @typedef {string|number|boolean|null} SimpleValue
- */
 
 
-/** Statement
- * @typedef {Object} Statement
- * @property {string} name
- * @property {string} type
- * @property {string} value
- */
+
+
