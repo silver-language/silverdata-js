@@ -44,18 +44,20 @@
 	<form name="test">
 		<select name="testName" size="7">
 			<option selected>assignment-string</option>
+			<option>assignment-number</option>
 			<!-- <option>array</option>
 			<option>html</option> -->
 		</select>
 		<select name="testType" size="7">
 			<option selected>json</option>
 			<option value="json-with-types">json with types</option>
+			<option value="statement-json">statement json</option>
 		</select>
 		<h2>test file</h2>
 
-		<textarea name="silverInput" spellcheck="false"></textarea>
-		<textarea name="jsonOutput" spellcheck="false" readonly data-test=""></textarea>
-		<textarea name="testJson" spellcheck="false" readonly></textarea>
+		<textarea name="inputSilver" spellcheck="false"></textarea>
+		<textarea name="outputGenerated" spellcheck="false" readonly data-test=""></textarea>
+		<textarea name="outputTest" spellcheck="false" readonly></textarea>
 	</form>
 
 	<script type="module">
@@ -65,35 +67,35 @@
 		async function changeTest() {
 			console.clear();
 			const testName = document.forms['test'].testName.value;
-			let silverInput = (await import(`./file/${testName}.agd`, { with: { type:'text' }})).default;
-			document.forms['test'].silverInput.value = silverInput;
+			let inputSilver = (await import(`./file/${testName}.agd`, { with: { type:'text' }})).default;
+			document.forms['test'].inputSilver.value = inputSilver;
 
 			const testType = document.forms['test'].testType.value;
 			const ext = fileExtension[testType];
 			console.log(testType,ext);
 
-			let testJson = (await import(`./file/${testName}.${ext}`, { with: { type:'text' }})).default;
-			document.forms['test'].testJson.value = testJson;
+			let outputTest = (await import(`./file/${testName}.${ext}`, { with: { type:'text' }})).default;
+			document.forms['test'].outputTest.value = outputTest;
 			update();
 		}
 
 
 		async function update() {
 
-			let silverInput = document.forms['test'].silverInput.value;
-			let generatedJson = silverData.silverToJSON(silverInput);
+			let inputSilver = document.forms['test'].inputSilver.value;
+			let generatedJson = silverData.silverToJSON(inputSilver);
 			//console.log(generatedJson);
-			document.forms['test'].jsonOutput.value = generatedJson;
+			document.forms['test'].outputGenerated.value = generatedJson;
 
-			let testJson = document.forms['test'].testJson.value;
-			let testResult = (generatedJson === testJson);
+			let outputTest = document.forms['test'].outputTest.value;
+			let testResult = (generatedJson === outputTest);
 
-			document.forms['test'].jsonOutput.dataset.test = (testResult) ? 'pass' : 'fail';
+			document.forms['test'].outputGenerated.dataset.test = (testResult) ? 'pass' : 'fail';
 
 		}
 		document.forms['test']['testName'].addEventListener('change', changeTest);
 		document.forms['test']['testType'].addEventListener('change', changeTest);
-		document.forms['test']['silverInput'].addEventListener('input', update);
+		document.forms['test']['inputSilver'].addEventListener('input', update);
 		changeTest();
 	</script>
 </body>

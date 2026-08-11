@@ -7,7 +7,7 @@
 // return various intermediate representations
 
 
-const statement = /^(\w+)\s+:\s+([A-Z]\w+)\s+(.*)$/;
+const statement = /^(\w+)\s*:\s*([A-Z]\w+)\s+(.*)$/;
 
 
 
@@ -15,10 +15,10 @@ const statement = /^(\w+)\s+:\s+([A-Z]\w+)\s+(.*)$/;
  * @param {string} string
  * @returns {Statement}
  */
-function assignment(string) {
+export function assignment(string) {
 
 	const match = string.match(statement);
-
+	console.log(string,match);
 	const result = {
 		name: match[1],
 		type: match[2],

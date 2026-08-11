@@ -31,3 +31,18 @@
 
 
 */
+
+
+
+export function statement() {
+
+}
+
+
+/**
+ * @param {any} object
+ * @returns {string}
+ */
+export function json(object) {
+	return JSON.stringify(object, undefined, '	');
+}
