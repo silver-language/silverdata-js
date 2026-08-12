@@ -19,7 +19,7 @@ Goals
 * Easy to update
 * Fairly modern js, no backward compatibility
 * A basic test suite
-* Single file
+* Single import
 * No dependencies
 * No build
 * JSDoc typing
