@@ -4,41 +4,8 @@
 	<title>silver-data test</title>
 	<link rel="icon" href="../favicon.svg">
 	<link rel="stylesheet" href="../index.css">
-	<style type="text/css">
-
-		form {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-			gap: 1em;
-
-			h2 { text-align:center; margin-block:0em; }
-
-			select { height:7em; }
-		}
-
-		textarea, output {
-			background-color:white;
-			padding:1em;
-			font-size: 14px;
-		}
-
-		[data-test=pass] {
-			outline:5px solid lime;
-		}
-
-		[data-test=fail] {
-			outline:5px solid red;
-		}
-
-		textarea {
-			font-family: monospace;
-			min-height: 64em;
-		}
-		output {
-			font-family: sans-serif;
-			border-radius:1em;
-		}
-	</style>
+	<link rel="stylesheet" href="./index.css">
+	<script type="module" src="./index.js"></script>
 </head>
 <body>
 	<form name="test">
@@ -50,7 +17,7 @@
 		</select>
 		<select name="testType" size="7">
 			<option selected>json</option>
-			<option value="json-with-types">json with types</option>
+			<option value="named">json with named nodes</option>
 			<option value="statement-json">statement json</option>
 		</select>
 		<h2>test file</h2>
@@ -60,43 +27,6 @@
 		<textarea name="outputTest" spellcheck="false" readonly></textarea>
 	</form>
 
-	<script type="module">
-		import * as silverData from '../silver-data.js';
-		import { fileExtension } from '../core/main.js';
 
-		async function changeTest() {
-			console.clear();
-			const testName = document.forms['test'].testName.value;
-			let inputSilver = (await import(`./file/${testName}.agd`, { with: { type:'text' }})).default;
-			document.forms['test'].inputSilver.value = inputSilver;
-
-			const testType = document.forms['test'].testType.value;
-			const ext = fileExtension[testType];
-			console.log(testType,ext);
-
-			let outputTest = (await import(`./file/${testName}.${ext}`, { with: { type:'text' }})).default;
-			document.forms['test'].outputTest.value = outputTest;
-			update();
-		}
-
-
-		async function update() {
-
-			let inputSilver = document.forms['test'].inputSilver.value;
-			let generatedJson = silverData.silverToJSON(inputSilver);
-			//console.log(generatedJson);
-			document.forms['test'].outputGenerated.value = generatedJson;
-
-			let outputTest = document.forms['test'].outputTest.value;
-			let testResult = (generatedJson === outputTest);
-
-			document.forms['test'].outputGenerated.dataset.test = (testResult) ? 'pass' : 'fail';
-
-		}
-		document.forms['test']['testName'].addEventListener('change', changeTest);
-		document.forms['test']['testType'].addEventListener('change', changeTest);
-		document.forms['test']['inputSilver'].addEventListener('input', update);
-		changeTest();
-	</script>
 </body>
 </html>
