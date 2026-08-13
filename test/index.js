@@ -7,16 +7,17 @@ import { representation } from '../core/main.js';
 
 async function changeTest() {
 	//console.clear();
-	const testName = document.forms['test'].testName.value;
-	let inputSilver = (await import(`./file/${testName}.agd`, { with: { type:'text' }})).default;
+
+	const testPath = document.forms['test'].inputPath.value;
+	let inputSilver = (await import(`./${testPath}.agd`, { with: { type:'text' }})).default;
 	document.forms['test'].inputSilver.value = inputSilver;
 
 	const testType = document.forms['test'].testType.value;
 
 	const ext = representation[testType].extension;
-	console.log(testType,ext);
+	//console.log(testType,ext);
 
-	let outputTest = (await import(`./file/${testName}.${ext}`, { with: { type:'text' }})).default;
+	let outputTest = (await import(`./${testPath}.${ext}`, { with: { type:'text' }})).default;
 	document.forms['test'].outputTest.value = outputTest;
 	update();
 }
@@ -42,7 +43,7 @@ async function update() {
 
 }
 
-document.forms['test']['testName'].addEventListener('change', changeTest);
+document.forms['test']['inputPath'].addEventListener('change', changeTest);
 document.forms['test']['testType'].addEventListener('change', changeTest);
 document.forms['test']['inputSilver'].addEventListener('input', update);
 
