@@ -44,3 +44,13 @@ YAML looks to do something similar (wikipedia/YAML):
 >Explicit data typing is seldom seen in the majority of YAML documents since YAML autodetects simple types. Data types can be divided into three categories: core, defined, and user-defined. Core are ones expected to exist in any parser (e.g. floats, ints, strings, lists, maps, ...). Many more advanced data types, such as binary data, are defined in the YAML specification but not supported in all implementations. Finally YAML defines a way to extend the data type definitions locally to accommodate user-defined classes, structures or primitives (e.g. quad-precision floats).
 
 
+Parsing simple values
+-------------------
+
+The assignment breakup with regex just returns values as strings.
+
+Sometime thereafter the strings will need to be converted to representations native to the parsing language.
+
+I'll begin with explicit type indications and the 4 json simples: string, number, boolean, and null
+
+

@@ -18,7 +18,7 @@ export const representation = {
 
 	'statement-json' : {
 		extension	: 'statement.json',
-		method		: silverToJSON,
+		method		: statementJSON,
 	}
 };
 
@@ -36,26 +36,44 @@ export function silverToJS(silverData) {
  * @returns {string}
  */
 export function silverToJSON(silverData) {
-	const sd = parse.assignment(silverData);
-	const result = json.stringify(sd);
+
+	const sn  = parse.silverToNamed(silverData);
+
+	console.log('sn:',sn);
+
+	let simplified = {};
+
+
+	for (const [name, item] of Object.entries(sn)) {
+		simplified[name] = parse.parseSimple(item.type, item.value);
+	}
+
+	const result = json.stringify(simplified);
+
 	return result;
 }
 
 
+
+
+
 /**
- * @param {string} silver
  * @param {string} silver
  * @returns {string}
  */
 export function silverToNamed(silver) {
 	console.log('--silverToNamed--');
-	const sd = parse.assignment(silver);
-	const named = {};
-	named[sd.name] = {
-		type	: sd.type,
-		value	: sd.value,
-	};
+	const named = parse.silverToNamed(silver)
 	const result = json.stringify(named);
 	return result;
 }
 
+/**
+ * @param {string} silverData
+ * @returns {string}
+ */
+export function statementJSON(silverData) {
+	const sd = parse.assignment(silverData);
+	const result = json.stringify(sd);
+	return result;
+}
