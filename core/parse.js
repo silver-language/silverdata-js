@@ -91,7 +91,9 @@ const parseMap = {
 	'Number'	: parseNumber,
 	'Integer'	: parseInteger,
 	'Boolean'	: parseBoolean,
-	'Null'		: parseNull
+	'Null'		: parseNull,
+	'Object'	: parseObject,
+	'Array'		: parseArray
 };
 
 
@@ -133,4 +135,20 @@ function parseBoolean(string) {
  */
 function parseNull(string) {
 	return null;
+}
+
+/** parseObject
+ * @param {string} string
+ * @returns {object}
+ */
+function parseObject(string) {
+	return {};
+}
+
+/** parseArray
+ * @param {string} string
+ * @returns {array}
+ */
+function parseArray(string) {
+	return [];
 }

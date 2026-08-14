@@ -54,3 +54,6 @@ Sometime thereafter the strings will need to be converted to representations nat
 I'll begin with explicit type indications and the 4 json simples: string, number, boolean, and null
 
 
+### Array and object
+Am adding a couple of placeholder tests for Object and Array - but they are not 'correct' silver-data.
+Will update them a little later.
