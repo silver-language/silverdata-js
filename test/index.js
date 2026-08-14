@@ -3,6 +3,7 @@
 */
 
 import * as silverData from '../silver-data.js';
+import { readFileContent } from '../core/file.js';
 import { representation } from '../core/main.js';
 
 async function changeInputFile() {
@@ -16,6 +17,8 @@ async function changeInputFile() {
 
 	const ext = representation[testType].extension;
 	//console.log(testType,ext);
+
+	const inputFilePath = `./${testPath}.${ext}`;
 
 	try {
 		const testImport = await import(`./${testPath}.${ext}`, { with: { type:'text' }});
@@ -32,10 +35,10 @@ async function changeInputFile() {
 	}
 
 	updateTest();
-}
+}/* changeInputFile */
 
 
-async function updateTest() {
+function updateTest() {
 
 	let inputSilver = document.forms['test'].inputSilver.value;
 
@@ -53,10 +56,17 @@ async function updateTest() {
 
 	document.forms['test'].outputGenerated.dataset.test = (testResult) ? 'pass' : 'fail';
 
-}
+}/* updateTest */
 
-document.forms['test']['inputPath'].addEventListener('change', changeInputFile);
-document.forms['test']['testType'].addEventListener('change', changeInputFile);
-document.forms['test']['inputSilver'].addEventListener('input', updateTest);
 
-changeInputFile();
+function documentDOMContentLoaded() {
+
+	document.forms['test']['inputPath'].addEventListener('change', changeInputFile);
+	document.forms['test']['testType'].addEventListener('change', changeInputFile);
+	document.forms['test']['inputSilver'].addEventListener('input', updateTest);
+
+	changeInputFile();
+
+}/* documentDOMContentLoaded */
+
+document.addEventListener('DOMContentLoaded', documentDOMContentLoaded);
