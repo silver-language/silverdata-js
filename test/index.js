@@ -5,7 +5,7 @@
 import * as silverData from '../silver-data.js';
 import { representation } from '../core/main.js';
 
-async function changeTest() {
+async function changeInputFile() {
 	//console.clear();
 
 	const testPath = document.forms['test'].inputPath.value;
@@ -17,13 +17,25 @@ async function changeTest() {
 	const ext = representation[testType].extension;
 	//console.log(testType,ext);
 
-	let outputTest = (await import(`./${testPath}.${ext}`, { with: { type:'text' }})).default;
-	document.forms['test'].outputTest.value = outputTest;
-	update();
+	try {
+		const testImport = await import(`./${testPath}.${ext}`, { with: { type:'text' }});
+		//console.log(testImport);
+
+		let outputTest = testImport.default;
+
+		//console.log(outputTest);
+		document.forms['test'].outputTest.value = outputTest;
+	}
+	catch {
+		console.log('testfile not found');
+		document.forms['test'].outputTest.value = '**testfile not found**';
+	}
+
+	updateTest();
 }
 
 
-async function update() {
+async function updateTest() {
 
 	let inputSilver = document.forms['test'].inputSilver.value;
 
@@ -43,8 +55,8 @@ async function update() {
 
 }
 
-document.forms['test']['inputPath'].addEventListener('change', changeTest);
-document.forms['test']['testType'].addEventListener('change', changeTest);
-document.forms['test']['inputSilver'].addEventListener('input', update);
+document.forms['test']['inputPath'].addEventListener('change', changeInputFile);
+document.forms['test']['testType'].addEventListener('change', changeInputFile);
+document.forms['test']['inputSilver'].addEventListener('input', updateTest);
 
-changeTest();
+changeInputFile();

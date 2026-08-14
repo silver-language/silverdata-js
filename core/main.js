@@ -39,7 +39,7 @@ export function silverToJSON(silverData) {
 
 	const sn  = parse.silverToNamed(silverData);
 
-	console.log('sn:',sn);
+	//console.log('sn:',sn);
 
 	let simplified = {};
 
@@ -62,7 +62,7 @@ export function silverToJSON(silverData) {
  * @returns {string}
  */
 export function silverToNamed(silver) {
-	console.log('--silverToNamed--');
+	//console.log('--silverToNamed--');
 	const named = parse.silverToNamed(silver)
 	const result = json.stringify(named);
 	return result;
