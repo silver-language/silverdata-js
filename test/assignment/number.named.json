@@ -1,6 +1,6 @@
 {
-	"taxicab2": {
-		"type": "Integer",
-		"value": "1729"
+	"goldenRatio": {
+		"type": "Number",
+		"value": "1.6180339887"
 	}
 }
