@@ -4,22 +4,47 @@
 
 
 
-/** readFileContent
+/** importFile
  * @param {string} filePath
  * @returns {Promise<string>}
  */
-export async function readFileContent(filePath) {
-
+export async function importFile(filePath) {
+	//console.log(textImport);
 	let result = undefined;
 
 	try {
-		const textImport = await import(`./${filePath}`, { with: { type:'text' }});
+		const textImport = await import(`${filePath}`, { with: { type:'text' }});
 		//console.log(textImport);
 		result = textImport.default;
 	}
 	catch {
-		console.log(`readFileContent: cannot read "${filePath}"`);
+		console.log(`importFile: cannot read "${filePath}"`);
 	}
 
 	return result;
-}/* readFileContent */
+}/* importFile */
+
+
+
+/** importJson
+ * @param {string} filePath
+ * @returns {Promise<object>}
+ */
+export async function importJson(filePath) {
+	//console.log(textImport);
+	let result = undefined;
+
+	try {
+		const jsonImport = await import(`${filePath}`, { with: { type:'json' }});
+		//console.log(textImport);
+		result = jsonImport.default;
+	}
+	catch {
+		console.log(`importJson: cannot read "${filePath}"`);
+	}
+
+	return result;
+}/* importJson */
+
+
+

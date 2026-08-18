@@ -57,3 +57,12 @@ I'll begin with explicit type indications and the 4 json simples: string, number
 ### Array and object
 Am adding a couple of placeholder tests for Object and Array - but they are not 'correct' silver-data.
 Will update them a little later.
+
+
+
+Test Directories
+----------------
+
+Need to start making this a bit dynamic.
+
+

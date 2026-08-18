@@ -3,7 +3,7 @@
 */
 
 import * as silverData from '../silver-data.js';
-import { readFileContent } from '../core/file.js';
+import { importFile, importJson } from '../core/file.js';
 import { representation } from '../core/main.js';
 
 async function changeInputFile() {
@@ -61,6 +61,13 @@ function updateTest() {
 
 function documentDOMContentLoaded() {
 
+
+	const url = new URL(window.location.href);
+	const basePath = url.pathname.replace('index.html','');
+	console.log('basePath',basePath);
+
+	const tests = loadTests(`${basePath}_directory.json`);
+
 	document.forms['test']['inputPath'].addEventListener('change', changeInputFile);
 	document.forms['test']['testType'].addEventListener('change', changeInputFile);
 	document.forms['test']['inputSilver'].addEventListener('input', updateTest);
@@ -70,3 +77,48 @@ function documentDOMContentLoaded() {
 }/* documentDOMContentLoaded */
 
 document.addEventListener('DOMContentLoaded', documentDOMContentLoaded);
+
+
+
+/**
+ * @param {string} directoryPath
+ * @return {Promise<array>}
+ */
+async function loadTests(directoryPath) {
+	const result = [];
+
+	/** @type Array<string> */
+	let directory = await importJson(`directoryPath`);
+	console.log('directory',directory);
+
+	// directory.map(
+	// 	(item) => {
+	// 		if (item.endsWith('/')){
+	// 			return
+	// 		}
+	// 	}
+	// );
+
+
+	return result;
+}
+
+
+
+
+
+
+
+/** TestDirectory
+ * @typedef {Object} TestDirectory
+ * @property {string} path
+ * @property {array} TestDirEntry
+ */
+
+/** TestDirEntry
+ * @typedef {TestDirectory|TestFile} TestDirEntry
+ */
+
+/** TestFile
+ * @typedef {string} TestFile
+ */
