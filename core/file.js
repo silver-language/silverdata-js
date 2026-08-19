@@ -36,7 +36,7 @@ export async function importJson(filePath) {
 
 	try {
 		const jsonImport = await import(`${filePath}`, { with: { type:'json' }});
-		//console.log(textImport);
+		console.log('jsonImport',jsonImport);
 		result = jsonImport.default;
 	}
 	catch {
