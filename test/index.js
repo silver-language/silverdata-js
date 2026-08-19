@@ -70,7 +70,7 @@ async function documentDOMContentLoaded() {
 
 	console.log('basePath',basePath);
 
-	const tests = await loadTests(`assignment/`);
+	const tests = await loadTests(`/`);
 
 	console.log('tests:',tests);
 
@@ -103,27 +103,33 @@ function testSelectOptions(tests) {
 
 
 /**
- * @param {string} directoryPath
- * @return {Promise<object>}
+ * @param {string} path
+ * @return {Promise<TestDirectory>}
  */
-async function loadTests(directoryPath) {
+async function loadTests(path) {
 	const result = {
-		path : directoryPath,
+		path : path,
 	};
 
 	/** @type Array<string> */
-	result.item = await importJson(`${basePath}${directoryPath}_test.json`);
-	console.log('loadTests', directoryPath, result);
+	result.item = await importJson(`${basePath}${path}_test.json`);
 
-	// directory.map(
-	// 	(item) => {
+
+	result.item.array.forEach(element => {
+
+	});
+	//  = await result.item.map(
+	// 	async (item) => {
 	// 		if (item.endsWith('/')){
-	// 			return
+	// 			return await loadTests(item);
+	// 		}
+	// 		else {
+	// 			return item;
 	// 		}
 	// 	}
 	// );
 
-
+	console.log('--loadTests', path, result);
 
 	return result;
 }
@@ -137,7 +143,7 @@ async function loadTests(directoryPath) {
 /** TestDirectory
  * @typedef {Object} TestDirectory
  * @property {string} path
- * @property {array} TestDirEntry
+ * @property {Array<TestDirEntry>} item
  */
 
 /** TestDirEntry
