@@ -70,9 +70,15 @@ async function documentDOMContentLoaded() {
 
 	console.log('basePath',basePath);
 
-	const tests = await loadTests(`/`);
+	const tests = await loadTestDirectory(`/`);
+	//const tests = await loadTestDirectory(`assignment/`);
 
-	console.log('tests:',tests);
+	flattenTestDirectories(tests);
+
+	console.log('final test dir structure:',tests);
+
+
+
 
 	document.forms['test']['inputPath'].innerHTML = testSelectOptions(tests);
 
@@ -88,12 +94,28 @@ async function documentDOMContentLoaded() {
 
 document.addEventListener('DOMContentLoaded', documentDOMContentLoaded);
 
-function testSelectOptions(tests) {
-	const options = tests.item.map(
-		(item) => `<option value="${tests.path}${item}">${item}</option>`
+
+/**
+ * @param {TestDirectory} testDirectory
+ */
+function testSelectOptions(testDirectory) {
+	let result;
+
+	const options = testDirectory.entry.map(
+		(item) => {
+			let html;
+			// if (typeof item === 'object') {
+			// 	html = ``
+			// }
+			// else {
+				html = `<option value="${testDirectory.path}${item}">${item}</option>`;
+			//}
+			return html;
+		}
+
 	);
-	const result = `
-		<optgroup label="${tests.path}">
+	result = `
+		<optgroup label="${testDirectory.path}">
 			${options.join('')}
 		</optgroup>
 	`;
@@ -101,27 +123,47 @@ function testSelectOptions(tests) {
 }
 
 
-
 /**
- * @param {string} path
+ * @param {TestDirectory} testDirectory
+ */
+function flattenTestDirectories(testDirectory) {
+
+	// take a nested object structure, and return a flattened array of dir objects that have the full path
+
+	console.log('flattenTestDirectories');
+
+
+
+}
+
+
+/** loadTestDirectory
+ * @param {string} directoryPath
  * @return {Promise<TestDirectory>}
  */
-async function loadTests(path) {
+async function loadTestDirectory(directoryPath) {
 	const result = {
-		path : path,
+		path	: directoryPath,
+		entry	: []
 	};
 
-	/** @type Array<string> */
-	result.item = await importJson(`${basePath}${path}_test.json`);
+	/** @type Array<TestDirEntry> */
+	result.entry = await importJson(`${basePath}${directoryPath}_test.json`);
 
 
-	result.item.array.forEach(element => {
+	// result.entry.forEach(
+	// 	(element) => {
+	// 		//console.log(element);
+	// 		element = 'foo';
+	// 	}
+	// );
 
-	});
-	//  = await result.item.map(
-	// 	async (item) => {
-	// 		if (item.endsWith('/')){
-	// 			return await loadTests(item);
+	// result.entry = await result.entry.map(
+	// 	(item) => {
+	// 		if (item.endsWith('/')) {
+	// 			//return "its a dir";
+	// 			const subDir = await loadTestDirectory(item);
+	// 			return subDir;
 	// 		}
 	// 		else {
 	// 			return item;
@@ -129,10 +171,26 @@ async function loadTests(path) {
 	// 	}
 	// );
 
-	console.log('--loadTests', path, result);
+
+	result.entry = await Array.fromAsync(
+		result.entry,
+		(item) => {
+			if (item.endsWith('/')) {
+				//return "its a dir";
+				const subDir = loadTestDirectory(item);
+				return subDir;
+			}
+			else {
+				return item;
+			}
+		}
+	);
+
+
+	console.log('--loadTestDirectory', directoryPath, result);
 
 	return result;
-}
+}/* loadTestDirectory */
 
 
 
@@ -141,9 +199,9 @@ async function loadTests(path) {
 
 
 /** TestDirectory
- * @typedef {Object} TestDirectory
- * @property {string} path
- * @property {Array<TestDirEntry>} item
+ * @typedef		{Object} 				TestDirectory
+ * @property	{string} 				path
+ * @property	{Array<TestDirEntry>}	entry
  */
 
 /** TestDirEntry
