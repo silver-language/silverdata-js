@@ -1,4 +1,6 @@
 [
+	"anonymous/",
+	"type/",
 	"boolean.agd",
 	"integer.agd",
 	"null.agd",
