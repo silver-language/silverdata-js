@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', documentDOMContentLoaded);
 function testSelectOptions(testDirectory) {
 	let result;
 
-	const options = testDirectory.entry.map(
+	const options = testDirectory.item.map(
 		(item) => {
 			let html;
 			// if (typeof item === 'object') {
@@ -144,10 +144,10 @@ function flattenTestDirectories(testDirectory) {
 async function loadTestDirectory(directoryPath) {
 	const result = {
 		path	: directoryPath,
-		entry	: []
+		item	: []
 	};
 
-	/** @type Array<TestDirEntry> */
+	/** @type Array<TestDirectoryItem> */
 	result.entry = await importJson(`${basePath}${directoryPath}_test.json`);
 
 
@@ -199,13 +199,13 @@ async function loadTestDirectory(directoryPath) {
 
 
 /** TestDirectory
- * @typedef		{Object} 				TestDirectory
- * @property	{string} 				path
- * @property	{Array<TestDirEntry>}	entry
+ * @typedef		{Object} 					TestDirectory
+ * @property	{string} 					path
+ * @property	{Array<TestDirectoryItem>}	item
  */
 
-/** TestDirEntry
- * @typedef {TestDirectory|TestFile} TestDirEntry
+/** TestDirectoryItem
+ * @typedef {TestFile|TestDirectory} TestDirectoryItem
  */
 
 /** TestFile
