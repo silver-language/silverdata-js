@@ -12,6 +12,11 @@ status: just started 🐣
 ```
 
 
+Description
+-----------
+Siler-data is a simple data format with types.
+
+
 Goals
 -----
 * Clear before clever
@@ -19,7 +24,7 @@ Goals
 * Easy to update
 * Fairly modern js, no backward compatibility
 * A basic test suite
-* Single file
+* Single import
 * No dependencies
 * No build
 * JSDoc typing

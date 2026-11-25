@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-320 -320 640 640">
+	<style>
+		rect { fill:yellow; }
+		circle {
+			fill:none;
+			stroke:black;
+		}
+		.small circle { stroke-width:44; }
+	</style>
+	<rect x="-320" y="-320" width="640" height="640" rx="80"/>
+	<g transform="translate(0,64)" style="stroke:grey;">
+		<circle cx="0" cy="0" r="159" style="stroke-width:58;"/>
+		<g class="small">
+			<circle r="74" cx="0" cy="-240"/>
+			<circle r="74" cx="-208" cy="120"/>
+			<circle r="74" cx="+208" cy="120"/>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,36 @@
+/*
+**	index.css
+*/
+
+form {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 1em;
+
+	h2 { text-align:center; margin-block:0em; }
+
+	select { height:10em; }
+}
+
+textarea, output {
+	background-color:white;
+	padding:1em;
+	font-size: 14px;
+}
+
+[data-test=pass] {
+	outline:5px solid lime;
+}
+
+[data-test=fail] {
+	outline:5px solid red;
+}
+
+textarea {
+	font-family: monospace;
+	min-height: 64em;
+}
+output {
+	font-family: sans-serif;
+	border-radius:1em;
+}

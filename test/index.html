@@ -1,90 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>agd test</title>
+	<title>silver-data test</title>
 	<link rel="icon" href="../favicon.svg">
 	<link rel="stylesheet" href="../index.css">
-	<style type="text/css">
-
-		form {
-			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
-			gap: 1em;
-
-			h2 { text-align:center; margin-block:0em; }
-
-			select { height:7em; }
-		}
-
-		textarea, output {
-			background-color:white;
-			padding:1em;
-			font-size: 14px;
-		}
-
-		[data-test=pass] {
-			outline:5px solid lime;
-		}
-
-		[data-test=fail] {
-			outline:5px solid red;
-		}
-
-		textarea {
-			font-family: monospace;
-			min-height: 64em;
-		}
-		output {
-			font-family: sans-serif;
-			border-radius:1em;
-		}
-	</style>
+	<link rel="stylesheet" href="./index.css">
+	<script type="module" src="./index.js"></script>
 </head>
 <body>
 	<form name="test">
-		<select name="testName" size="7">
-			<option selected>array</option>
-			<option>html</option>
-		</select>
-		<h2>output</h2>
-		<h2>test</h2>
+		<select name="inputPath" size="7">
 
-		<textarea name="silverInput" spellcheck="false"></textarea>
-		<textarea name="jsonOutput" spellcheck="false" readonly data-test=""></textarea>
-		<textarea name="testJson" spellcheck="false" readonly></textarea>
+			<!--
+			<option selected>assignment/boolean</option>
+			<option>assignment/integer</option>
+			<option>assignment/null</option>
+			<option>assignment/number</option>
+			<option>assignment/string</option>
+			<option>assignment/array</option>
+			<option>assignment/object</option>
+			 -->
+			<!-- <option>assignment-multiple</option> -->
+			<!-- <option>html</option> -->
+		</select>
+		<select name="testType" size="7">
+			<option selected>json</option>
+			<option value="named">json with named nodes</option>
+			<option value="statement-json">statement json</option>
+		</select>
+		<h2>test file</h2>
+
+		<textarea name="inputSilver" spellcheck="false"></textarea>
+		<textarea name="outputGenerated" spellcheck="false" readonly data-test=""></textarea>
+		<textarea name="outputTest" spellcheck="false" readonly></textarea>
 	</form>
 
-	<script type="module">
-		import * as silverData from '../silver-data.js'
 
-		async function changeTest() {
-			console.clear();
-			const testName = document.forms['test'].testName.value;
-			let silverInput = (await import(`./file/${testName}.agd`, { with: { type:'text' }})).default;
-			document.forms['test'].silverInput.value = silverInput;
-
-			let testJson = (await import(`./file/${testName}.json`, { with: { type:'text' }})).default;
-			document.forms['test'].testJson.value = testJson;
-			update();
-		}
-
-
-		async function update() {
-
-			let silverInput = document.forms['test'].silverInput.value;
-			let generatedJson = silverData.silverToJSON(silverInput);
-			//console.log(generatedJson);
-			document.forms['test'].jsonOutput.value = generatedJson;
-
-			let testJson = document.forms['test'].testJson.value;
-			let testResult = (generatedJson === testJson);
-
-			document.forms['test'].jsonOutput.dataset.test = (testResult) ? 'pass' : 'fail';
-
-		}
-		document.forms['test']['testName'].addEventListener('change', changeTest);
-		document.forms['test']['silverInput'].addEventListener('input', update);
-		changeTest();
-	</script>
 </body>
 </html>

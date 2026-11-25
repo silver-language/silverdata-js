@@ -1,0 +1,11 @@
+[
+	"anonymous/",
+	"type/",
+	"boolean.agd",
+	"integer.agd",
+	"null.agd",
+	"number.agd",
+	"string.agd",
+	"array.agd",
+	"object.agd"
+]

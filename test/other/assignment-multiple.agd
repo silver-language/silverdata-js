@@ -1,0 +1,2 @@
+lipsum		: String `Lorem ipsum dolor sit amet`
+taxicab2	: Integer 1729
