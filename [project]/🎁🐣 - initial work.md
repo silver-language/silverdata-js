@@ -6,6 +6,7 @@ I've made a couple of attempts at this previously, time for another go.
 
 ```
 2026-08-08		🎁🐣		Start work
+2026-11-25		0.0.1		dot release for project data
 ```
 
 
@@ -64,5 +65,17 @@ Test Directories
 ----------------
 
 Need to start making this a bit dynamic.
+
+
+
+
+0.0.1 release for project data
+------------------------------
+
+Small detour here.
+Nothing's really working yet (i think) but want to push something up for the coordinated project-data task.
+It's not really a 'release' as such, just a deploy I guess.
+
+
 
 
