@@ -76,6 +76,10 @@ Small detour here.
 Nothing's really working yet (i think) but want to push something up for the coordinated project-data task.
 It's not really a 'release' as such, just a deploy I guess.
 
+* Updated structure for project
+* New icon & a screenshot
+
+
 
 
 

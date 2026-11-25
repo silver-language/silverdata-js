@@ -12,6 +12,11 @@ status: just started 🐣
 ```
 
 
+Description
+-----------
+Siler-data is a simple data format with types.
+
+
 Goals
 -----
 * Clear before clever
